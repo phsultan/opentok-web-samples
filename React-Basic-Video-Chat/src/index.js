@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './RTCPeerConnectionShim';
 import '@opentok/client';
 
 import App from './App';
