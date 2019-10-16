@@ -29,8 +29,8 @@ if (origPeerConnection) {
                             pc.report.inbound_rtp[report.mediaType].packetsReceived = report.packetsReceived;
                             break;
                         case 'remote-inbound-rtp':
-                            pc.report.remote_inbound_rtp[report.mediaType].packetsLost = report.packetsLost;
-                            pc.report.remote_inbound_rtp[report.mediaType].roundTripTime = report.roundTripTime;
+                            pc.report.remote_inbound_rtp[report.kind].packetsLost = report.packetsLost;
+                            pc.report.remote_inbound_rtp[report.kind].roundTripTime = report.roundTripTime;
                             break;
                         case 'candidate-pair':
                             pc.report.candidate_pair.currentRoundTripTime = report.currentRoundTripTime;
