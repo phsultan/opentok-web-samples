@@ -21,16 +21,16 @@ if (origPeerConnection) {
                 reports.forEach(report => {
                     switch (report.type) {
                         case 'outbound-rtp':
-                            pc.report.outbound_rtp[report.kind].packetsSent = report.packetsSent;
-                            pc.report.outbound_rtp[report.kind].retransmittedPacketsSent = report.retransmittedPacketsSent;
+                            pc.report.outbound_rtp[report.mediaType].packetsSent = report.packetsSent;
+                            pc.report.outbound_rtp[report.mediaType].retransmittedPacketsSent = report.retransmittedPacketsSent;
                             break;
                         case 'inbound-rtp':
-                            pc.report.inbound_rtp[report.kind].packetsLost = report.packetsLost;
-                            pc.report.inbound_rtp[report.kind].packetsReceived = report.packetsReceived;
+                            pc.report.inbound_rtp[report.mediaType].packetsLost = report.packetsLost;
+                            pc.report.inbound_rtp[report.mediaType].packetsReceived = report.packetsReceived;
                             break;
                         case 'remote-inbound-rtp':
-                            pc.report.remote_inbound_rtp[report.kind].packetsLost = report.packetsLost;
-                            pc.report.remote_inbound_rtp[report.kind].roundTripTime = report.roundTripTime;
+                            pc.report.remote_inbound_rtp[report.mediaType].packetsLost = report.packetsLost;
+                            pc.report.remote_inbound_rtp[report.mediaType].roundTripTime = report.roundTripTime;
                             break;
                         case 'candidate-pair':
                             pc.report.candidate_pair.currentRoundTripTime = report.currentRoundTripTime;
