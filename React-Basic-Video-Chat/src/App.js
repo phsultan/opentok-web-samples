@@ -66,17 +66,17 @@ export default class App extends React.Component {
 
           switch (pc.localDescription.type) {
               case 'offer':
-                  console.log('Found a publisher');
-                  pc.isPublisher = true;
-                  this.setState({ publisherStats : pc.report });
-                  break;
+                // This RTCPeerConnection is published to OpenTok
+                pc.isPublisher = true;
+                this.setState({ publisherStats : pc.report });
+                break;
               case 'answer':
-                  console.log('Found a subscriber');
-                  subscriberStatsArray.push(pc.report);
-                  break;
+                // This RTCPeerConnection is subscribed from OpenTok
+                subscriberStatsArray.push(pc.report);
+                break;
               default:
-                  console.log('Huh ?', pc);
-                  break;
+                console.log('Huh ?', pc);
+                break;
           }
 
           this.setState({ subscriberStatsArray: subscriberStatsArray });
