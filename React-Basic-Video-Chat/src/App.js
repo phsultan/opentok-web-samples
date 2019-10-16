@@ -49,8 +49,6 @@ export default class App extends React.Component {
       },
     };
 
-
-
     setInterval(() => {
       const subscriberStatsArray = [];
       window.myPeerConnections.forEach((pc, index) => {
@@ -81,7 +79,6 @@ export default class App extends React.Component {
                   break;
           }
 
-          console.log('subscriberStatsArray.length :', subscriberStatsArray.length);
           this.setState({ subscriberStatsArray: subscriberStatsArray });
       })
     }, 5000);    
@@ -168,7 +165,6 @@ export default class App extends React.Component {
           {subscriberStatsArray ? (
             <div>
               { subscriberStatsArray.map((subscriberStats, index) => {
-                  console.log('index :', index);
                   return <div key={ index } >
                       <div> Inbound Audio Packets (received/lost): { subscriberStats.inbound_rtp.audio.packetsReceived }/{ subscriberStats.inbound_rtp.audio.packetsLost }</div>
                       <div> Inbound Video packets (received/lost): { subscriberStats.inbound_rtp.video.packetsReceived }/{ subscriberStats.inbound_rtp.video.packetsLost }</div>
