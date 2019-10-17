@@ -5,6 +5,9 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.otPublisher = React.createRef();
+    this.otSubscribers = [];
+
     this.state = {
       error: null,
       connection: 'Connecting',
@@ -50,6 +53,19 @@ export default class App extends React.Component {
     };
 
     setInterval(() => {
+
+      this.otPublisher.current.getPublisher().getStats((err, stats) => {
+        console.log('[opentok][publisher] stats[0].stats.audio :', stats[0].stats.audio);
+        console.log('[opentok][publisher] stats[0].stats.video :', stats[0].stats.video);
+      });
+
+      this.otSubscribers.forEach(element => {
+        element && element.getSubscriber().getStats((err, stats) => {
+          console.log(`[opentok][subscriber ${element.subscriberId}] stats.audio :`, stats.audio);
+          console.log(`[opentok][subscriber ${element.subscriberId}] stats.video :`, stats.video);
+        });
+      });
+
       const subscriberStatsArray = [];
       window.myPeerConnections.forEach((pc, index) => {
           if (pc.connectionState === 'closed') {
@@ -132,6 +148,7 @@ export default class App extends React.Component {
             {publishVideo ? 'Disable' : 'Enable'} Video
           </button>
           <OTPublisher
+            ref={this.otPublisher}
             properties={{ publishVideo, width: 50, height: 50, }}
             onPublish={this.onPublish}
             onError={this.onPublishError}
@@ -139,6 +156,19 @@ export default class App extends React.Component {
           />
           <OTStreams>
             <OTSubscriber
+              ref={(ref) => {
+                if (!ref) {
+                  return;
+                }
+
+                if (this.otSubscribers.find((element) => {
+                  return element.subscriberId === ref.subscriberId;
+                })) {
+                  return;
+                }
+
+                this.otSubscribers.push(ref);
+              }}
               properties={{ width: 100, height: 100 }}
               onSubscribe={this.onSubscribe}
               onError={this.onSubscribeError}
