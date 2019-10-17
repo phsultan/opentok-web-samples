@@ -18,7 +18,7 @@ if (origPeerConnection) {
             }
 
             pc.getStats().then(reports => {
-                reports.forEach(report => {
+                reports && reports.forEach(report => {
                     switch (report.type) {
                         case 'outbound-rtp':
                             pc.report.outbound_rtp[report.mediaType].packetsSent = report.packetsSent;
