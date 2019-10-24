@@ -50,6 +50,9 @@ export default class App extends React.Component {
       videoDisabled: () => {
         console.log('Subscriber video disabled');
       },
+      videoDisabledWarning: () => {
+        console.log('Subscriber video warning');
+      }
     };
 
     setInterval(() => {
